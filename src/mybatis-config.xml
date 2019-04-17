@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- 引入jdbc.properties文件 -->
+	<properties resource="database.properties" />
+	<!-- 设置缓存 -->
+	<settings>
+		<!-- 懒加载 -->
+		<setting name="lazyLoadingEnabled" value="true"/>
+		<setting name="aggressiveLazyLoading" value="false"/>
+		<setting name="cacheEnabled" value="true"/>
+	</settings>
+	<!-- 为Java类型命名一个别名（简称） -->
+	<typeAliases>
+		<package name="cn.smbms.pojo"/>
+	</typeAliases>
+	<!-- 配置数据源 -->
+	<environments default="development">
+		<environment id="development">
+			<!-- 配置事务管理，采用JDBC的事务管理 -->
+			<transactionManager type="JDBC"></transactionManager>
+			<dataSource type="POOLED">
+				<property name="driver" value="${driver}"/>
+				<property name="url" value="${url}"/>
+				<property name="username" value="${user}"/>
+				<property name="password" value="${password}"/>
+			</dataSource>
+		</environment>
+	</environments>
+	<!-- 将映射文件加入到配置文件中 -->
+	<mappers>
+		<mapper resource="cn/smbms/dao/bill/BillMapper.xml"/>
+		<mapper resource="cn/smbms/dao/user/UserMapper.xml"/>
+		<mapper class="cn.smbms.dao.provider.ProviderDao"/>
+		<mapper class="cn.smbms.dao.role.RoleDao"/>
+	</mappers>
+</configuration>
